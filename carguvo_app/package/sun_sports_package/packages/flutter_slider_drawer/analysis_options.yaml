@@ -1,0 +1,23 @@
+# Round 8 (W4, 15/09/2026): package FLUTTER — dùng `flutter_lints` như phần
+# `lib/` của app (package Dart thuần dùng `package:lints/recommended.yaml`).
+# Trước đây không có file này nên analyzer kế thừa config ở GỐC repo.
+#
+# G5 (16/09/2026): FORK pub.dev — exclude thư mục example của upstream +
+# tắt các rule style gây nhiễu trên code upstream (super parameters, library
+# name, key) — giữ phần lints còn lại nguyên vẹn.
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "example/**"
+  language:
+    strict-casts: true
+    strict-raw-types: true
+
+linter:
+  rules:
+    use_super_parameters: false
+    unnecessary_library_name: false
+    use_key_in_widget_constructors: false

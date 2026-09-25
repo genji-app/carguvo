@@ -1,0 +1,285 @@
+name: sun_sports
+description: "Sun Sports — embeddable Flutter package (formerly the s88-flutter app)."
+
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.1+7
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  # Lõi Volta dùng chung với jaspr_web — DART THUẦN, xem
+  # `packages/game_volta_core/lib/game_volta_core.dart`.
+  game_volta_core:
+    path: packages/game_volta_core
+
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # State Management
+  # hooks_riverpod: ^2.5.1
+  flutter_riverpod: ^2.5.1
+  # flutter_hooks: ^0.20.5
+
+  # Model
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.9.0
+
+  # Utils
+  wakelock_plus: ^1.4.0
+  google_fonts: ^6.2.1
+  dartz: ^0.10.1
+  crypto: ^3.0.3            # MD5 hashing for auth
+  uuid: ^4.2.1              # Generate device ID
+  device_info_plus: ^11.5.0  # Get device/OS info
+  web: ^1.1.1               # Web platform APIs (userAgent, etc.)
+  path_provider: ^2.1.0      # Get app documents directory for cache
+  archive: ^4.0.7            # Mini game zip asset extraction (Phase 1D)
+  isolate_manager: ^6.1.2   # Background processing for web & native
+  # JWT decode đã gộp vào package `auth_domain` (Phase 5, 10/09/2026) — D4:
+  # bỏ dep `jwt_decoder`; decode/expiry đọc qua `JwtClaims` của package.
+
+  # Networking
+  http: ^1.1.0
+  dio: ^5.10.0
+  connectivity_plus: ^6.1.0
+  pretty_dio_logger: ^1.4.0
+  shared_preferences: ^2.2.0
+  web_socket_channel: ^3.0.0
+ 
+  # Protobuf (required for sport_socket V2 protocol)
+  protobuf: ^6.0.0
+  fixnum: ^1.1.0
+
+  #routing
+  go_router: ^13.2.4
+
+  # Logging
+  logger: ^2.4.0
+  flutter_svg: ^2.2.2
+  qr_flutter: ^4.1.0          # Generate QR code (download app on web desktop)
+  cached_network_image: ^3.4.1
+  intl: ^0.20.2
+  gap: ^3.0.1
+  webview_flutter: ^4.11.2
+  # Chặn iframe (platform view) nuốt pointer của widget Flutter vẽ ĐÈ lên nó
+  # (FAB/panel mini game trên livestream/tracker) — package chính chủ Flutter.
+  pointer_interceptor: ^0.10.1
+  video_player: ^2.9.2
+  shimmer_animation: ^2.1.0
+  fluttertoast: ^8.2.8
+  url_launcher: ^6.2.5
+  grouped_list: ^6.0.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  flutter_in_app_pip: ^1.7.4
+  styled_text: ^8.1.0
+  pinput: ^6.0.1
+  lottie: ^3.3.2
+  rive: ^0.14.9
+  blur: ^4.0.2
+  # Audio
+  audioplayers: ^6.5.1
+  webview_flutter_wkwebview: ^3.23.7
+  gradient_borders: ^1.0.2
+
+  # Internal Packages
+  adaptive_overlay:
+    path: packages/adaptive_overlay
+  # Vendored fork: thêm re-clamp vị trí FAB khi resize màn hình (xem
+  # packages/floating_draggable_widget/pubspec.yaml). Mini game floating FAB.
+  floating_draggable_widget:
+    path: packages/floating_draggable_widget
+  flutter_slider_drawer:
+    path: packages/flutter_slider_drawer
+  game_api_client:
+    path: packages/game_api_client
+  game_engine:
+    path: packages/game_engine
+  game_downloader:
+    path: packages/game_downloader
+  # Chuỗi hiển thị DÙNG CHUNG với jaspr_web (tách 08/09/2026) —
+  # `lib/core/constants/i18n.dart` giờ chỉ re-export package này.
+  app_i18n:
+    path: packages/app_i18n
+  # Brand config DÙNG CHUNG với jaspr_web (gộp 08/09/2026): suy mirror CDN,
+  # giải mã body JSON/base64, model đọc khoá khoan dung. Phần apply vào
+  # `SbConfig` vẫn của riêng app.
+  brand_config:
+    path: packages/brand_config
+  # Môi trường + URL config DÙNG CHUNG với jaspr_web (gộp 08/09/2026) — pure
+  # Dart. `lib/core/env/app_env.dart` giờ chỉ re-export package này.
+  app_env:
+    path: packages/app_env
+  # Port Dart thuần của ProviderGameManager.ts (Cocos) — quản lý danh mục +
+  # luồng chơi game provider. Pure Dart (0 dependency), dùng chung Flutter app
+  # + jaspr_web; nền tảng đọc qua các facade của `app_env`, không có env riêng.
+  provider_game_manager:
+    path: packages/provider_game_manager
+  casino_jackpot:
+    path: packages/casino_jackpot
+  # Domain đặt cược DÙNG CHUNG với jaspr_web (tách 10/09/2026 — Phase 3):
+  # enum nền OddsStyle/OddsType/GamePart, MarketOddsRules, bảng tên market,
+  # kèo rung, selectionId API, MissingOfferTracker.
+  # `league_enums.dart` / `market_odds_rules.dart` /
+  # `missing_offer_tracker.dart` giờ chỉ re-export package này.
+  betting_domain:
+    path: packages/betting_domain
+  # Micro-utils Dart thuần DÙNG CHUNG với jaspr_web (Round 6 — 4.4, mở rộng
+  # Round 7 — C5/C6): RequestLock, Semaphore, Debouncer,
+  # MicrotaskBurstCoalescer, máy trạng thái phân trang PaginatedMachine.
+  # `lib/core/misc/debouncer.dart` / `semaphore.dart` / `request_lock_mixin.dart`
+  # + `lib/core/utils/microtask_burst_coalescer.dart` giờ chỉ re-export package.
+  dart_kit:
+    path: packages/dart_kit
+  clock: ^1.1.2
+  # LUẬT THÀNH-CÔNG + result model paygate (NẠP/RÚT — TIỀN) DÙNG CHUNG app
+  # Flutter + jaspr_web (Round 7 — C1): mỗi lệnh một luật thành-công
+  # (thiếu status OK/lỗi, 1099 thành-công-mềm chargeCard).
+  paygate_domain:
+    path: packages/paygate_domain
+  # Protocol mini game DÙNG CHUNG với jaspr_web (tách 10/09/2026 — Phase 7):
+  # MessageRequest/MessageResponse, codec packet mảng JSON, RawMessage,
+  # message từng game (tai_xiu…). `features/mini_game/socket/enums.dart` +
+  # `mini_game_message_codec.dart` + `messages/tai_xiu_message.dart` giờ chỉ
+  # re-export package này.
+  mini_game_protocol:
+    path: packages/mini_game_protocol
+  # Mini game Tai Xiu countdown badge logic DÙNG CHUNG app + web (Round 6 — Phase 3.3):
+  # TaiXiuCountdownController + TaiXiuCountdownState + TaiXiuNanFlags.
+  mini_game_countdown_core:
+    path: packages/mini_game_countdown_core
+  # Tầng parse thuần lịch sử giao dịch DÙNG CHUNG với jaspr_web (Phase 8-5.3,
+  # tách 10/09/2026): enums + parseSortTime + bảng status + service-name map.
+  # Model UnifiedTransaction freezed vẫn ở app; mapper giờ delegate sang package.
+  transaction_domain:
+    path: packages/transaction_domain
+  # Format hiển thị DÙNG CHUNG với jaspr_web (tách 10/09/2026) — formatCompact
+  # làm tròn XUỐNG, dấu phẩy hàng nghìn, nhận diện message tiếng Việt.
+  # `core/utils/money_formatter.dart` + `core/error/app_error_messages.dart`
+  # giờ delegate sang package này.
+  app_format:
+    path: packages/app_format
+  # Domain auth DÙNG CHUNG với jaspr_web — mở rộng Phase 5 (10/09/2026):
+  # HashUtils (MD5 auth hash), JwtClaims (thay jwt_decoder), landing parse.
+  # `core/utils/hash_utils.dart` giờ chỉ re-export package này.
+  auth_domain:
+    path: packages/auth_domain
+  # Monitoring DÙNG CHUNG với jaspr_web (Round 6 — Phase 4, 13/09/2026):
+  # sentry_scrubber NGUỒN DUY NHẤT (trước đây web port tay 1:1, sửa luật phải
+  # sửa cả 2 file). Package phụ thuộc `sentry` core — sentry_flutter re-export
+  # cùng kiểu nên app dùng trực tiếp được.
+  monitoring_domain:
+    path: packages/monitoring_domain
+  # Match notice detector DÙNG CHUNG app Flutter + jaspr_web (Round 6 — Phase 2.1,
+  # 13/09/2026): MatchNoticeDetector + NoticeGapRules NGUỒN DUY NHẤT (trước đây
+  # app MatchNoticeNotifier + web MatchNoticeService port tay 1:1).
+  sport_notice:
+    path: packages/sport_notice
+  # Luật hộp thông báo (phân loại theo message + thời gian tương đối) DÙNG
+  # CHUNG với jaspr_web — Round 7 đợt 5 (B8): model giữ host (freezed), package
+  # chỉ đóng logic thuần.
+  notification_domain:
+    path: packages/notification_domain
+  # Chat WebSocket protocol DÙNG CHUNG với jaspr_web (Round 4) —
+  # `lib/core/services/websocket/sb_chat_websocket.dart` đã import package
+  # này nhưng dep chưa từng có trong pubspec app (bị bỏ sót) → compile fail.
+  # Bổ sung 13/09/2026 — Round 7 (R7-0/A9).
+  chat_protocol:
+    path: packages/chat_protocol
+  fullscreen_guard:
+    path: packages/fullscreen_guard
+  orientation_guard:
+    path: packages/orientation_guard
+  sport_socket:
+    path: packages/sport_socket
+  # G1-1 (16/09/2026): game_url + game_asset + game_launcher_lifecycle GỘP
+  # thành game_foundation (tầng PURE của nhóm game — state/cache/lifecycle).
+  game_foundation:
+    path: packages/game_foundation
+  # Round 8 (W2): `game_jackpot` / `sport_vibrating_odds` / `sport_live` đã XOÁ —
+  # cả 3 không có host nào import (app + web + package khác = 0 call-site). Chúng
+  # là bản port song song: `game_jackpot` trùng tên class JackpotTierState/
+  # JackpotDisplayState với `casino_jackpot` (bản đang dùng thật, field khác),
+  # `sport_vibrating_odds` bọc lại `betting_domain.VibratingOddsChecker` nhưng
+  # `_config` không được đọc (config truyền vào bị bỏ qua), `sport_live` còn 2
+  # unused_import. Xem PACKAGE_LOGIC_REVIEW_R8.md (F4). Khôi phục nếu cần:
+  # `git checkout <sha-cũ> -- packages/<tên>`.
+  game_orientation:
+    path: packages/game_orientation
+  # Native launcher (MethodChannel `launchGame`) — bị XOÁ NHẦM ở 14fb69d7d
+  # (đợt tách `game_launcher_lifecycle`) làm cocos_game_controller /
+  # cocos_game_providers đứt import. Phục hồi 13/09/2026 — Round 7 (R7-0/A8).
+  game_launcher:
+    path: packages/game_launcher
+  sport_events:
+    path: packages/sport_events
+  package_info_plus: ^9.0.1
+
+  # Monitoring / Crash reporting (self-hosted Sentry)
+  # Bump 8.14.2 → 9.24.0: build 8.14.2 lỗi "SentryBinaryImageCache has no
+  # member 'image'" trên Xcode mới (iOS 26 SDK / iPhone 17 Pro simulator) —
+  # native Sentry-Cocoa pin của 8.x không tương thích toolchain mới. 9.x bump
+  # pin Sentry-Cocoa mới hơn, khắc phục lỗi build này. Đã đối chiếu migration
+  # guide 8.x→9.x: không API nào trong SentryService/sentry_scrubber bị
+  # xoá/đổi tên (enableTracing, autoAppStart, dart:html, SentryUser.segment…
+  # không dùng trong repo này).
+  sentry_flutter: ^9.24.0
+  clarity_flutter: ^1.9.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+  mocktail: ^1.0.3
+  build_runner: ^2.10.1
+  freezed: ^3.2.3
+  json_serializable: ^6.8.0
+  flutter_gen_runner: ^5.12.0
+  isolate_manager_generator: ^0.3.0
+  flutter_inappwebview: ^6.1.5
+  fake_async: ^1.3.3
+  sentry_dart_plugin: ^3.4.0
+  wakelock_plus_platform_interface: ^1.5.1
+
+# flutter_gen:
+#   output: lib/gen/ # Optional (default: lib/gen/)
+#   # line_length: 80 # Optional
+
+#   # Optional
+#   integrations:
+#     image: false
+#     flutter_svg: false
+#     rive: false
+#     lottie: false
+
+flutter:
+  uses-material-design: true
+  # assets/images/mini_game đã gỡ (icon mini game chuyển hết sang CDN webp);
+  # thư mục trống mà còn khai báo sẽ chặn build "unable to find directory entry".
+  # For local testing
+  # assets:
+    # - assets/images/game_assets/
+
+# ===== Sentry symbol/source-map upload (sentry_dart_plugin) =====
+# Chạy `dart run sentry_dart_plugin` SAU mỗi lần build release để upload
+# source maps (web) + debug symbols (native) → stacktrace prod đọc được.
+#
+# org/url để công khai ở đây; project và auth_token đặt qua ENV mỗi lần build:
+#   SENTRY_PROJECT  = g1-fe-web (web) | g1-fe-mobile (native)
+#   SENTRY_AUTH_TOKEN = <token>  (BÍ MẬT — không commit, đặt làm secret CI)
+# Release tự là `sun_sports@<version>+<build>` từ pubspec, khớp với runtime
+# (xem SentryService.init đặt options.release y hệt).
+sentry:
+  upload_source_maps: true   # web: bật (mặc định false)
+  upload_debug_symbols: true # native: bật
+  upload_sources: true      # TẮT bundle source .dart để giảm payload (tránh 413). Bật lại khi nginx đã nới client_max_body_size.
+  org: sentry
+  url: https://sentry.admsun.com
+  symbols_path: build/debug-info # khớp --split-debug-info khi build native
+  log_level: info

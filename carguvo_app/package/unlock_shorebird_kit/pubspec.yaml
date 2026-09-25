@@ -1,0 +1,30 @@
+name: unlock_shorebird_kit
+description: Reusable unlock flow, remote config, and Shorebird update UI for Flutter apps.
+version: 0.1.0
+publish_to: 'none'
+
+environment:
+  sdk: ^3.10.0
+  flutter: '>=3.24.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.1.0
+  dio: ^5.7.0
+  shared_preferences: ^2.5.3
+  shorebird_code_push: ^2.0.5
+  flutter_bloc: ^9.1.1
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.9.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.4.13
+  freezed: ^3.2.3
+  json_serializable: ^6.8.0
+
+flutter:
+  uses-material-design: true

@@ -1,0 +1,32 @@
+include: package:lints/recommended.yaml
+
+linter:
+  # G5 (16/09/2026): chuyển list → map để tắt được rule; bỏ
+  # `sort_constructors_first` (68 infos style thuần trên code sẵn, không phải
+  # lỗi logic).
+  rules:
+    avoid_print: true
+    prefer_single_quotes: true
+    require_trailing_commas: true
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    avoid_unnecessary_containers: true
+    prefer_final_locals: true
+    unawaited_futures: true
+    unintended_html_in_doc_comment: false
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "**/*.pb.dart"
+    - "**/*.pbenum.dart"
+    - "**/*.pbjson.dart"
+    - "**/*.pbserver.dart"
+    # G5: ví dụ minh hoạ — không analyze (deprecated_member_use vớiOpacity…)
+    - "example/**"
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+

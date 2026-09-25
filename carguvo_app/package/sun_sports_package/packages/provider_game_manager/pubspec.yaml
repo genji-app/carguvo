@@ -1,0 +1,34 @@
+name: provider_game_manager
+description: >-
+  Port Dart THUAN cua ProviderGameManager.ts (Cocos Creator) — manager danh muc
+  va luot choi game nha cung cap (provider game). Khong import Flutter/dart:io/
+  dart:html — moi thu phu thuoc nen tang (HTTP, storage, mo tab, UI, session)
+  duoc doc qua 4 facade dung chung cua package:app_env (AppDevice / AppHttp /
+  AppStorage / AppSession) ma host nap 1 lan luc boot — KHONG con "env" rieng
+  cua package nay.
+version: 0.1.0
+publish_to: none
+
+environment:
+  # Giong auth_domain: ha de ca jaspr_web (sdk ^3.11) va Flutter app dung duoc.
+  sdk: ">=3.9.2 <4.0.0"
+
+# Chỉ MỘT dependency, và nó cũng là pure Dart: `app_env` giữ `AppDevice` —
+# nguồn duy nhất trả lời browser/mobile/phone/tablet cho CẢ app Flutter,
+# jaspr_web và các package chung (gộp 08/09/2026, thay 2 member
+# toàn bộ 18 member của `ProviderGameEnv` cũ — xem lib/provider_game_manager.dart).
+#
+# ⚠️ Ngoài nó, core KHÔNG được kéo thêm dependency nào: KHÔNG `package:flutter`,
+# `dart:io`, `dart:html`. Thứ gì thuộc nền tảng thì thêm vào facade của
+# `app_env` để MỌI package chung dùng lại, đừng khai env riêng ở đây.
+dependencies:
+  app_env:
+    path: ../app_env
+  # G2-1 (16/09/2026): ActivityGroup + classifyActivityGroup chuyển sang
+  # game_taxonomy (0-dep) — re-export ở barrel cho host cũ.
+  game_taxonomy:
+    path: ../game_taxonomy
+
+dev_dependencies:
+  lints: ^5.0.0
+  test: ^1.24.0

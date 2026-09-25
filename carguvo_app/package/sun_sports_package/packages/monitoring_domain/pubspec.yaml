@@ -1,0 +1,22 @@
+name: monitoring_domain
+description: >-
+  Monitoring dùng chung app Flutter + jaspr_web (Round 6 — Phase 4 của
+  SHARED_PACKAGES_ROUND6.md): luật che dữ liệu nhạy cảm trước khi gửi Sentry
+  (sentry_scrubber) + model timing login. Thuần Dart, phụ thuộc `sentry` core
+  (app Flutter qua sentry_flutter re-export cùng kiểu).
+version: 0.1.0
+publish_to: none
+
+environment:
+  # Bám app_env (>=3.9.2) — đủ cho app Flutter 3.9.2 lẫn jaspr_web Dart 3.11.
+  sdk: ">=3.9.2 <4.0.0"
+
+dependencies:
+  # Core thuần của Sentry (sentry_flutter re-export cùng kiểu) — package chỉ
+  # cần các lớp SentryEvent/SentryRequest/SentryException/SentryMessage/
+  # SentryBreadcrumb/Breadcrumb để scrub. KHÔNG phụ thuộc sentry_flutter.
+  sentry: ^9.24.0
+
+dev_dependencies:
+  test: ^1.25.0
+  lints: ^5.0.0

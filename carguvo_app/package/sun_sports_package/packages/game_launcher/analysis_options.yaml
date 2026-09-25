@@ -1,0 +1,11 @@
+# Round 8 (W4, 15/09/2026): package FLUTTER — dùng `flutter_lints` như phần
+# `lib/` của app (package Dart thuần dùng `package:lints/recommended.yaml`).
+# Trước đây không có file này nên analyzer kế thừa config ở GỐC repo.
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+  language:
+    strict-casts: true

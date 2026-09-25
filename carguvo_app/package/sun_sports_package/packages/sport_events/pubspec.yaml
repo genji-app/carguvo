@@ -1,0 +1,21 @@
+name: sport_events
+description: "Sport events management logic shared between app and jaspr_web."
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=3.9.2 <4.0.0"
+
+# Round 8 (W9): GỠ 2 dep `betting_domain` + `provider_game_manager` — `lib/` KHÔNG
+# hề import (package chỉ có model + hook thuần). Khai thừa làm bản đồ phụ thuộc
+# sai lệch, người đọc tưởng có coupling.
+# app_env: storage/HTTP facades + sb_config fallback URL for LeagueAliasStore
+# (league chip labels, 2026-09-17).
+dependencies:
+  app_env:
+    path: ../app_env
+
+dev_dependencies:
+  test: ^1.25.0
+  # Round 8 (W4): xem `game_asset/pubspec.yaml`.
+  lints: ^5.0.0

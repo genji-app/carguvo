@@ -1,0 +1,27 @@
+name: transaction_domain
+description: >-
+  Tầng parse thuần của lịch sử giao dịch DÙNG CHUNG app Flutter + jaspr_web
+  (tách 10/09/2026 — Phase 8 của PACKAGING_PLAN.md, mục 5.3): enums giao dịch
+  (TransactionSource/Status/SlipType/PaymentMethod + ActivityGroup), parseSortTime
+  (giây/mili-giây + responseTime>requestTime), bảng mã status Codepay,
+  resolveCardWithdrawStatus (CHỮ trước MÃ sau), mapServiceNameToGroup (thứ tự
+  if "Hủy rút" mang ngữ nghĩa). 4 chỗ SAI thì hỏng cả màn lịch sử — sửa 1 chỗ.
+  Pure Dart; MODEL (UnifiedTransaction) thuộc host: app giữ freezed, web giữ
+  bản thuần (quyết khi vào Phase 8-5.3).
+version: 0.1.0
+publish_to: none
+
+environment:
+  # Bám app_env (>=3.9.2) — đủ cho app Flutter lẫn jaspr_web (Dart ^3.11).
+  sdk: ">=3.9.2 <4.0.0"
+
+dependencies:
+  # ActivityGroup + classifyActivityGroup — G2-1 (16/09/2026): nguồn đã chuyển
+  # sang package `game_taxonomy` (0-dep), KHÔNG còn dep ngược
+  # provider_game_manager (đảo tầng).
+  game_taxonomy:
+    path: ../game_taxonomy
+
+dev_dependencies:
+  lints: ^5.0.0
+  test: ^1.25.0

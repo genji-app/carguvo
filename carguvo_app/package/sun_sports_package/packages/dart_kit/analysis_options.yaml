@@ -1,0 +1,15 @@
+# Round 8 (W4, 15/09/2026): package DART THUẦN dùng chung app + jaspr_web.
+#
+# Trước đây không có file này nên analyzer kế thừa `analysis_options.yaml` ở GỐC
+# repo (`flutter_lints` + strict-raw-types + rule UI…) — rule của Flutter áp lên
+# package Dart thuần sinh issue không liên quan. Nay khai đúng chuẩn, giống
+# `provider_game_manager` / `sport_socket`: `lints/recommended` của SDK, KHÔNG
+# kéo flutter_lints để package không bị hút về phía Flutter.
+include: package:lints/recommended.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+  language:
+    strict-casts: true

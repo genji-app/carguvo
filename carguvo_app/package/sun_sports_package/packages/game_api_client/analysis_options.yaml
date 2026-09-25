@@ -1,0 +1,13 @@
+# Package PURE (dio) — G5 (16/09/2026): đổi từ `flutter_lints/flutter.yaml`
+# sang lints SDK chuẩn (package pure, không Flutter). Giữ nguyên formatter 100.
+include: package:lints/recommended.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+  language:
+    strict-casts: true
+
+formatter:
+  page_width: 100

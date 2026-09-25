@@ -1,0 +1,28 @@
+name: auth_domain
+description: >-
+  Domain thuần Dart cho luồng auth của s88 — entities/usecases/repository
+  interface/validator DÙNG CHUNG giữa app Flutter và jaspr_web (single source,
+  không port tay). Tách từ lib/features/auth/domain + core/utils/auth_validator
+  (verify 0 import Flutter/Riverpod/Dio — vòng 10, 2026-07-22).
+  Phase 5 (10/09/2026, PACKAGING_PLAN.md mục 3.3–3.5) bổ sung: HashUtils (MD5
+  auth hash), JwtClaims (decode/expiry thay `jwt_decoder` + jwt_utils web),
+  parseLandingCredentials (landing auto-login).
+version: 0.1.0
+publish_to: none
+
+environment:
+  # Bám app_env (>=3.9.2) — đủ cho app Flutter lẫn jaspr_web (Dart ^3.11).
+  sdk: ">=3.9.2 <4.0.0"
+
+dependencies:
+  freezed_annotation: ^3.1.0
+  # MD5 auth hash (HashUtils) — cả app lẫn jaspr_web đã dùng crypto ^3.
+  crypto: ^3.0.0
+  # G2-2 (16/09/2026): wire chat chuyển sang chat_protocol (thấp hơn auth) —
+  # barrel re-export tạm cho host cũ. Chiều auth_domain → chat_protocol hợp lệ.
+  chat_protocol:
+    path: ../chat_protocol
+
+dev_dependencies:
+  test: ^1.25.0
+  lints: ^5.0.0

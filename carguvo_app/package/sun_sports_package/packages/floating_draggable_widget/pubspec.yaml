@@ -1,0 +1,33 @@
+name: floating_draggable_widget
+description: >-
+  A flutter package for floating draggable widget. By this package a developer
+  can implement a widget which can be draggable inside the screen freely.
+  FORK nội bộ (pub.dev, giữ SDK cũ >=2.16.2 — G5 ngoại lệ duy nhất). FLUTTER
+  ONLY — KHÔNG dùng được cho jaspr_web.
+version: 2.3.0
+# Round 8 (W10): fork nội bộ (xem khối dưới) nhưng vẫn trùng tên package THẬT
+# trên pub.dev — thiếu dòng này thì một lệnh `dart pub publish` nhầm sẽ bị chặn
+# muộn ở phía server. Mọi package khác trong `packages/` đều đã có.
+publish_to: none
+homepage: https://github.com/Smueez/floating_animated_widget
+
+# Vendored fork of floating_draggable_widget 2.3.0.
+# Lý do fork: bản gốc lưu vị trí FAB bằng toạ độ tuyệt đối (top/left) và KHÔNG
+# re-clamp khi màn hình đổi kích thước (vd thu nhỏ cửa sổ browser) → FAB kéo ra
+# rìa sẽ nằm ngoài màn hình và bị che. Patch ở build() re-clamp top/left theo
+# kích thước màn hình hiện tại. Đồng thời nới SDK upper-bound lên <4.0.0 cho
+# Dart 3 (path dependency không được pub tự nới như hosted package).
+environment:
+  sdk: ">=2.16.2 <4.0.0"
+  flutter: ">=2.10.4"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.1
+
+flutter:

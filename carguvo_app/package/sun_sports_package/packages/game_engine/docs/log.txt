@@ -1,0 +1,96 @@
+[OrientationGuard] build (AppDefaultBoth): orientation=Orientation.landscape, activePolicy=GameBlock(sunwin / experience: largeTablet), isOverridden=true, isMatched=true, shouldBlock=true main.dart.js:52639:78
+[WebNoopStrategy] isMatched: GameBlock(sunwin / experience: largeTablet), orientation: Orientation.landscape, isDesktop: true, forceEnforcement: false, skipDesktop: true main.dart.js:52639:78
+[OrientationGuard] build (GameBlock(sunwin / experience: largeTablet)): orientation=Orientation.landscape, activePolicy=GameBlock(sunwin / experience: largeTablet), isOverridden=false, isMatched=true, shouldBlock=false main.dart.js:52639:78
+[WebNoopStrategy] isMatched: GameBlock(sunwin / experience: largeTablet), orientation: Orientation.landscape, isDesktop: true, forceEnforcement: false, skipDesktop: true main.dart.js:52639:78
+[OrientationController] apply: skipped (already active: GameBlock(sunwin / experience: largeTablet)) main.dart.js:52639:78
+[CaxiloConfigClient] Launching: SC | Strategy: GameLaunchStrategy.iframe main.dart.js:52639:78
+[CaxiloConfigClient] Generated URL: https://fish.sunwin.qa/?token=ccdbe65e7c554fffaa1869a6e17a3f22&iframeType=flutter-web main.dart.js:52639:78
+Local Game URL: https://fish.sunwin.qa/?token=ccdbe65e7c554fffaa1869a6e17a3f22&iframeType=flutter-web main.dart.js:52639:78
+Feature Policy: Skipping unsupported feature name “autoplay”. main.dart.js:128757:1
+Feature Policy: Skipping unsupported feature name “accelerometer”. main.dart.js:128757:1
+Feature Policy: Skipping unsupported feature name “gyroscope”. main.dart.js:128757:1
+Feature Policy: Skipping unsupported feature name “clipboard-read”. main.dart.js:128757:1
+Feature Policy: Skipping unsupported feature name “clipboard-write”. main.dart.js:128757:1
+Feature Policy: Skipping unsupported feature name “payment”. main.dart.js:128757:1
+Feature Policy: Skipping unsupported feature name “midi”. main.dart.js:128757:1
+Feature Policy: Skipping unsupported feature name “autoplay”. main.dart.js:128777:20
+Feature Policy: Skipping unsupported feature name “accelerometer”. main.dart.js:128777:20
+Feature Policy: Skipping unsupported feature name “gyroscope”. main.dart.js:128777:20
+Feature Policy: Skipping unsupported feature name “clipboard-read”. main.dart.js:128777:20
+Feature Policy: Skipping unsupported feature name “clipboard-write”. main.dart.js:128777:20
+Feature Policy: Skipping unsupported feature name “payment”. main.dart.js:128777:20
+Feature Policy: Skipping unsupported feature name “midi”. main.dart.js:128777:20
+Feature Policy: Skipping unsupported feature name “autoplay”. main.dart.js:128802:9
+Feature Policy: Skipping unsupported feature name “accelerometer”. main.dart.js:128802:9
+Feature Policy: Skipping unsupported feature name “gyroscope”. main.dart.js:128802:9
+Feature Policy: Skipping unsupported feature name “clipboard-read”. main.dart.js:128802:9
+Feature Policy: Skipping unsupported feature name “clipboard-write”. main.dart.js:128802:9
+Feature Policy: Skipping unsupported feature name “payment”. main.dart.js:128802:9
+Feature Policy: Skipping unsupported feature name “midi”. main.dart.js:128802:9
+Feature Policy: Skipping unsupported feature name “autoplay”. main.dart.js:64333:3
+Feature Policy: Skipping unsupported feature name “accelerometer”. main.dart.js:64333:3
+Feature Policy: Skipping unsupported feature name “gyroscope”. main.dart.js:64333:3
+Feature Policy: Skipping unsupported feature name “clipboard-read”. main.dart.js:64333:3
+Feature Policy: Skipping unsupported feature name “clipboard-write”. main.dart.js:64333:3
+Feature Policy: Skipping unsupported feature name “payment”. main.dart.js:64333:3
+Feature Policy: Skipping unsupported feature name “midi”. main.dart.js:64333:3
+WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER. canvaskit.js:15:383
+unreachable code after return statement common-v1obf.js:1:51297
+Partitioned cookie or storage access was provided to “https://fish.sunwin.qa/?token=ccdbe65e7c554fffaa1869a6e17a3f22&iframeType=flutter-web” because it is loaded in the third-party context and dynamic state partitioning is enabled. common-v1obf.js:1:107642
+Create unpacker 079499991 for 6dkeWRTOBGXICfYQ7JUBnG cocos2d-js-min.1f833.js:1:487396
+Create unpacker 07ce7530a for 14TDKXr2NJ6LjvHPops74o cocos2d-js-min.1f833.js:1:487396
+Create unpacker 0d669730c for c0BAyVxX9JzZy8EjFrc9DU cocos2d-js-min.1f833.js:1:487396
+Create unpacker 0e4bc3b03 for 0ek66qC1NOQLjgYmi04HvX cocos2d-js-min.1f833.js:1:487396
+Cookie warnings 4
+Create unpacker 0cc9ca47e for 02delMVqdBD70a/HSD99FK cocos2d-js-min.1f833.js:1:487396
+Use of the orientation sensor is deprecated. dacs.js:5:22637
+Cocos Creator v2.1.3 cocos2d-js-min.1f833.js:1:176182
+Create unpacker 075c32000 for d8YiiQigZG0K0VIutzCfqU cocos2d-js-min.1f833.js:1:487396
+DOMException: Permission denied to get property "href" on cross-origin object
+    prepare https://web.sun88.win/assets/packages/flutter_inappwebview_web/assets/web/web_support.js:53
+web_support.js:55:37
+DOMException: Permission denied to access property "console" on cross-origin object
+    prepare https://web.sun88.win/assets/packages/flutter_inappwebview_web/assets/web/web_support.js:61
+web_support.js:84:37
+DOMException: Permission denied to access property "history" on cross-origin object
+    prepare https://web.sun88.win/assets/packages/flutter_inappwebview_web/assets/web/web_support.js:88
+web_support.js:201:37
+DOMException: Permission denied to access property "open" on cross-origin object
+    prepare https://web.sun88.win/assets/packages/flutter_inappwebview_web/assets/web/web_support.js:207
+web_support.js:237:37
+Create unpacker 09c3f1d48 for c7Mr/F1p1Mb6A9T337hkb6 cocos2d-js-min.1f833.js:1:487396
+Create unpacker 01a3e1700 for efIxDhUz9AJ4t3xjrQlpuU cocos2d-js-min.1f833.js:1:487396
+Reporting Header: invalid JSON value received. collect
+LoadScene d8YiiQigZG0K0VIutzCfqU: 0ms - timer ended cocos2d-js-min.1f833.js:1:170732
+Create unpacker 03211b850 for f9P8zaPbhEj5NwzvN6oQ2U instrument.js:91:1
+Success to load scene: db://assets/slot/cc-fish4-1993/ktf1993Loading.fire instrument.js:91:1
+WebGL warning: texSubImage: Texture has not been initialized prior to a partial upload, forcing the browser to clear it. This may be slow.
+WebGL warning: texSubImage: Tex image TEXTURE_2D level 0 is incurring lazy initialization.
+[Lifecycle] state=AppLifecycleState.inactive oldValue=false → newValue=null hasListeners=false identityHash=70150196 main.dart.js:52639:78
+[Lifecycle] state=AppLifecycleState.hidden oldValue=false → newValue=true hasListeners=false identityHash=70150196 main.dart.js:52639:78
+[Lifecycle] state=AppLifecycleState.inactive oldValue=true → newValue=null hasListeners=false identityHash=70150196 main.dart.js:52639:78
+[Lifecycle] state=AppLifecycleState.resumed oldValue=true → newValue=false hasListeners=false identityHash=70150196 main.dart.js:52639:78
+LoadScene f9P8zaPbhEj5NwzvN6oQ2U: 0ms - timer ended cocos2d-js-min.1f833.js:1:170732
+WebGL warning: texSubImage: Texture has not been initialized prior to a partial upload, forcing the browser to clear it. This may be slow.
+WebGL warning: texSubImage: Tex image TEXTURE_2D level 0 is incurring lazy initialization.
+[WebNoopStrategy] isMatched: AppDefaultBoth, orientation: Orientation.landscape, isDesktop: true, forceEnforcement: false, skipDesktop: true main.dart.js:52639:78
+[OrientationGuard] build (AppDefaultBoth): orientation=Orientation.landscape, activePolicy=GameBlock(sunwin / experience: largeTablet), isOverridden=true, isMatched=true, shouldBlock=true main.dart.js:52639:78
+[WebNoopStrategy] isMatched: GameBlock(sunwin / experience: largeTablet), orientation: Orientation.landscape, isDesktop: true, forceEnforcement: false, skipDesktop: true main.dart.js:52639:78
+[OrientationGuard] build (GameBlock(sunwin / experience: largeTablet)): orientation=Orientation.landscape, activePolicy=GameBlock(sunwin / experience: largeTablet), isOverridden=false, isMatched=true, shouldBlock=false main.dart.js:52639:78
+[Banner] mobileWidth game banner: 170 main.dart.js:52639:78
+[Banner] desktopWidth game banner: 190 main.dart.js:52639:78
+[Banner] mobileWidth game banner: 153 main.dart.js:52639:78
+[Banner] desktopWidth game banner: 153 main.dart.js:52639:78
+[Banner] mobileWidth game banner: 153 main.dart.js:52639:78
+[Banner] desktopWidth game banner: 350 main.dart.js:52639:78
+[WebNoopStrategy] isMatched: GameBlock(sunwin / experience: largeTablet), orientation: Orientation.landscape, isDesktop: true, forceEnforcement: false, skipDesktop: true main.dart.js:52639:78
+Source map error: request failed with status 404
+Resource URL: https://web.sun88.win/flutter_bootstrap.js
+Source Map URL: flutter.js.map
+The resource at “https://fish.sunwin.qa/exitFullscreen.073ee.png” preloaded with link preload was not used within a few seconds. Make sure all attributes of the preload tag are set correctly. fish.sunwin.qa
+Source map error: Error: request failed with status 404
+Stack in the worker:networkRequest@resource://devtools/client/shared/source-map-loader/utils/network-request.js:43:9
+
+Resource URL: https://web.sun88.win/flutter_bootstrap.js
+Source Map URL: flutter.js.map
+[LeagueNotifier] 🧹 Cleared MarketStatusProvider (API refresh)

@@ -1,0 +1,9 @@
+# Pure Dart package — lints chuẩn giống app_env / betting_domain / transaction_domain.
+include: package:lints/recommended.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+  language:
+    strict-casts: true

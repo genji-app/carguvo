@@ -1,0 +1,80 @@
+name: carguvo
+description: "Carguvo - Quản lý hàng hóa trên xe tải"
+publish_to: "none"
+version: 2.0.4+5
+
+environment:
+  # Bump từ ^3.8.1: `unlock_shorebird_kit` yêu cầu sdk ^3.10.0,
+  # `sun_sports` yêu cầu ^3.9.2 → giao là ^3.10.0.
+  sdk: ^3.10.0
+  flutter: ">=3.29.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  get: ^4.7.2
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  google_fonts: ^6.2.1
+  uuid: ^4.5.1
+  intl: ^0.20.2
+  # Dùng trực tiếp trong lib/root_gate.dart (ProviderScope + Override)
+  # cho cây widget của sun_sports. Constraint khớp sun_sports.
+  flutter_riverpod: ^2.5.1
+
+  # ===== Local packages (nằm trong repo, thư mục `package/`) =====
+  # Cover/unlock gate + Shorebird update UI.
+  unlock_shorebird_kit:
+    path: package/unlock_shorebird_kit
+  # Toàn bộ app s88 đóng gói lại thành package (AppMode.betting).
+  sun_sports:
+    path: package/sun_sports_package
+
+  # Restart process thật (terminate: true) — BẮT BUỘC để Shorebird apply patch.
+  # Widget-remount không apply patch vì VM vẫn chạy snapshot cũ.
+  terminate_restart: ^1.1.0
+
+  # ===== PRE-BUNDLE native plugin cho Shorebird =====
+  # Shorebird patch CHỈ thay được Dart code, KHÔNG thêm được plugin native.
+  # Mọi plugin mà `sun_sports` dùng phải nằm sẵn trong binary release, nếu
+  # không sẽ ném MissingPluginException ở runtime (~5ms, mọi lần gọi).
+  # Constraint để TRÙNG KHỚP với package/sun_sports_package/pubspec.yaml —
+  # đổi bên đó thì phải đổi ở đây rồi RELEASE BINARY MỚI (patch không đủ).
+  connectivity_plus: ^6.1.0
+  shared_preferences: ^2.2.0
+  path_provider: ^2.1.0
+  device_info_plus: ^11.5.0
+  package_info_plus: ^9.0.1
+  wakelock_plus: ^1.4.0
+  url_launcher: ^6.2.5
+  fluttertoast: ^8.2.8
+  webview_flutter: ^4.11.2
+  webview_flutter_wkwebview: ^3.23.7
+  flutter_inappwebview: ^6.1.5
+  video_player: ^2.9.2
+  flutter_in_app_pip: ^1.7.4
+  audioplayers: ^6.5.1
+  pinput: ^6.0.1
+  rive: ^0.14.9
+  rive_native: ^0.1.11
+  sentry_flutter: ^9.24.0
+  clarity_flutter: ^1.9.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - shorebird.yaml
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app_icon.png"
+  min_sdk_android: 24

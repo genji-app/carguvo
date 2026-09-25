@@ -1,0 +1,13 @@
+name: dart_kit
+description: >
+  Micro-utils DÙNG CHUNG app Flutter + jaspr_web (Round 6 — Phase 4.4):
+  request lock, semaphore, debouncer. Pure Dart, 0 dependency.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=3.9.2 <4.0.0"
+
+dev_dependencies:
+  test: ^1.24.0
+  lints: ^5.0.0

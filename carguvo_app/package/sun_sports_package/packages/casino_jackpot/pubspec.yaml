@@ -1,0 +1,19 @@
+name: casino_jackpot
+description: >-
+  Jackpot casino — poll số dư jackpot rồi nội suy mượt giữa 2 lượt poll
+  (ticker). Pure Dart, tách khỏi `caxilo_repository` 09/09/2026 để gỡ được
+  package đó; dùng chung app Flutter + jaspr_web.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=3.9.2 <4.0.0"
+
+dependencies:
+  game_api_client:
+    path: ../game_api_client
+  meta: ^1.11.0
+
+dev_dependencies:
+  lints: ^5.0.0
+  test: ^1.24.0

@@ -1,0 +1,21 @@
+name: game_launcher
+description: >-
+  Bọc MethodChannel để bàn giao quyền điều khiển từ Flutter sang native Cocos
+  engine (launchGame). FLUTTER ONLY (package:flutter/services +
+  package_info_plus) — KHÔNG dùng được cho jaspr_web.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=3.9.2 <4.0.0"
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  package_info_plus: ">=8.0.0 <11.0.0"   # rộng để khớp host (app/sun_sports dùng 9.x)
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0

@@ -1,0 +1,30 @@
+name: game_volta_core
+description: >-
+  Lõi Volta dùng chung cho app Flutter và jaspr_web. DART THUẦN — không
+  `package:flutter`, không Riverpod, không HTTP client cụ thể.
+publish_to: none
+version: 1.0.0
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+
+dependencies:
+  meta: ^1.15.0
+  crypto: ^3.0.0
+  # Socket Volta. Thuần Dart, chạy cả VM lẫn web — app Flutter và jaspr_web đều
+  # đã phụ thuộc package này từ trước, nên không sinh thêm phụ thuộc mới cho bên
+  # nào. Đây là thư viện NGOÀI duy nhất của lõi ngoài meta/crypto: mọi thứ dính
+  # nền tảng khác đi qua `VoltaPlatform` / `VoltaHttpTransport`.
+  web_socket_channel: ^3.0.0
+  # `StateNotifier` — gói **Dart thuần**, chính là thứ `flutter_riverpod` bọc
+  # lại rồi re-export. Nhờ lấy thẳng từ đây mà `VoltaNotifier` (1.500 dòng luật
+  # vận hành ván) sang được jaspr_web mà không phải viết lại, đồng thời vẫn cắm
+  # vừa `StateNotifierProvider` bên Flutter.
+  state_notifier: ^1.0.0
+
+dev_dependencies:
+  # `analysis_options.yaml` của gói này include `package:lints/recommended.yaml`
+  # — thiếu khai báo ở đây thì analyzer báo `include_file_not_found` và gói chạy
+  # KHÔNG có lint nào cả. Cố ý là `lints` chứ không phải `flutter_lints`: gói
+  # này là Dart thuần.
+  lints: ^5.0.0

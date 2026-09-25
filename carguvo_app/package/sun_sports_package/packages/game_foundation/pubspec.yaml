@@ -1,0 +1,29 @@
+name: game_foundation
+description: >-
+  Tang nen PURE DART cua nhom game DUNG CHUNG app Flutter + jaspr_web (G1-1 cua
+  PACKAGE_LOGIC_IMPROVEMENT_PLAN.md, 16/09/2026 — gop 3 package phan manh
+  game_url + game_asset + game_launcher_lifecycle): GameUrlState (state UI lay
+  URL game), AssetCacheController / AssetStorage / toBustedUrl (cache asset,
+  periodic clear doc gio qua clock, gioi han request qua dart_kit.Semaphore),
+  GameLauncherState / GameLauncherLifecycle (cooldown + session guard).
+  KHONG import Flutter/dart:io — phan native (MethodChannel / dart:io /
+  webview) thuoc game_launcher / game_downloader / game_engine (FLUTTER ONLY).
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=3.9.2 <4.0.0"
+
+dependencies:
+  # G3: Semaphore giới hạn request asset — 1 nguồn duy nhất dart_kit.
+  dart_kit:
+    path: ../dart_kit
+  # Cooldown lifecycle + periodic clear đọc giờ qua clock — fake_async test được.
+  clock: ^1.1.2
+  # GameLauncherState.activeGame (LobbyGame) + SunGameStatus (lifecycle).
+  provider_game_manager:
+    path: ../provider_game_manager
+
+dev_dependencies:
+  test: ^1.25.0
+  lints: ^5.0.0

@@ -1,0 +1,5 @@
+enum TooltipStrategy {
+  standard,
+
+  composited,
+}

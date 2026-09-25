@@ -1,0 +1,28 @@
+name: game_orientation
+# Round 8 (W10): sửa mô tả SAI. Package phụ thuộc Flutter SDK (`dart:ui` qua
+# `orientation_guard`) ⇒ CHỈ app Flutter dùng được, jaspr_web KHÔNG (đã gỡ khỏi
+# `jaspr_web/pubspec.yaml` cùng round). Trước đây ghi "shared between app and
+# jaspr_web" khiến tưởng dùng chung được.
+description: >-
+  Luật chọn hướng màn hình theo game (LobbyGame → OrientationPolicy). FLUTTER
+  ONLY (dùng BuildContext + dart:ui qua orientation_guard) — KHÔNG dùng được
+  cho jaspr_web.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=3.9.2 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider_game_manager:
+    path: ../provider_game_manager
+  orientation_guard:
+    path: ../orientation_guard
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  # Round 8 (W4): xem `game_asset/pubspec.yaml` (bản Flutter dùng flutter_lints).
+  flutter_lints: ^6.0.0

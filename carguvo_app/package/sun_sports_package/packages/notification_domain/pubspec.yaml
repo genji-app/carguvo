@@ -1,0 +1,16 @@
+name: notification_domain
+description: >-
+  Luật THUẦN cho hộp thông báo DÙNG CHUNG app Flutter + jaspr_web (R7 đợt 5,
+  B8): phân loại theo nội dung message (regex tiếng Việt — server KHÔNG trả
+  field category) + thời gian tương đối. Model (app freezed / web model thuần)
+  GIỮ Ở HOST — package chỉ đóng logic thuần.
+version: 0.1.0
+publish_to: none
+
+environment:
+  # Bám app_env (>=3.9.2) — đủ cho app Flutter 3.9.2 lẫn jaspr_web Dart 3.11.
+  sdk: ">=3.9.2 <4.0.0"
+
+dev_dependencies:
+  test: ^1.25.0
+  lints: ^5.0.0

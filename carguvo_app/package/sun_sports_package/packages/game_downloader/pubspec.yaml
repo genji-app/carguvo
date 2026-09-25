@@ -1,0 +1,28 @@
+name: game_downloader
+# Round 8 (W10): nói rõ phạm vi. Package dùng `dart:io` + Flutter ⇒ chỉ host
+# native (app Flutter) dùng được; jaspr_web KHÔNG. Trước đây để chung trong nhóm
+# "logic dùng chung app + web" gây hiểu nhầm.
+description: >-
+  Tải, kiểm tra version và giải nén game bundle (Cocos). FLUTTER/NATIVE ONLY
+  (dùng dart:io) — KHÔNG dùng được cho jaspr_web.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=3.9.2 <4.0.0"
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dio: ^5.7.0
+  archive: ">=3.6.1 <5.0.0"   # cho phép 4.x để khớp lottie (archive ^4.0.0)
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  path_provider: ^2.1.4
+  http: ^1.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0

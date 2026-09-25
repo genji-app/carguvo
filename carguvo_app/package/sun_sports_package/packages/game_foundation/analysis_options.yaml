@@ -1,0 +1,11 @@
+# Package DART THUẦN dùng chung app + jaspr_web (G1-1) — chuẩn giống
+# `game_url` / `game_asset` cũ: `lints/recommended` của SDK + strict-casts,
+# KHÔNG kéo flutter_lints để package không bị hút về phía Flutter.
+include: package:lints/recommended.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+  language:
+    strict-casts: true

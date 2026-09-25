@@ -1,0 +1,11 @@
+include: package:lints/recommended.yaml
+
+formatter:
+  page_width: 100
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+  language:
+    strict-casts: true

@@ -1,0 +1,43 @@
+name: game_engine
+description: >-
+  Supports in-house proprietary games (IHRunner) and 3rd-party live provider
+  games (PLRunner). FLUTTER ONLY (flutter_inappwebview + dart:ui) — KHÔNG dùng
+  được cho jaspr_web.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=3.9.2 <4.0.0"
+  flutter: '>=3.27.0'
+
+dependencies:
+  # Nền tảng/thiết bị DÙNG CHUNG với app Flutter + jaspr_web (gộp 08/09/2026):
+  # `AppDevice.isPhoneBrowser` thay 2 bản parse User-Agent từng nằm trong
+  # package này. Pure Dart, host nạp dữ kiện lúc boot.
+  app_env:
+    path: ../app_env
+  flutter:
+    sdk: flutter
+  flutter_inappwebview: ^6.1.5
+  meta: ^1.11.0
+  web: ^1.0.0
+  # Legacy dependencies (migrating to flutter_inappwebview)
+  # webview_flutter: ^4.11.2
+  # webview_flutter_wkwebview: ^3.23.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  mocktail: ^1.0.0
+  flutter_lints: ^6.0.0
+  plugin_platform_interface: ^2.1.8
+
+# The following section is specific to Flutter packages.
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.caxilo.engine.compositor
+        pluginClass: CaxiloSurfaceCompositorPlugin

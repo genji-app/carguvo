@@ -1,0 +1,24 @@
+name: fullscreen_guard
+description: >-
+  A robust fullscreen and system UI chrome management package for Flutter.
+  FLUTTER ONLY (Flutter widgets + services) — KHÔNG dùng được cho jaspr_web.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=3.9.2 <4.0.0"
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  meta: ^1.11.0
+  web: ^1.1.1
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.0
+
+flutter:

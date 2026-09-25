@@ -1,0 +1,14 @@
+name: brand_config
+description: >-
+  Brand config (s88.json) DÙNG CHUNG cho app Flutter và jaspr_web: suy nguồn dự
+  phòng CDN, giải mã body (JSON hoặc base64), và model đọc khoá khoan dung.
+  Pure Dart — không HTTP client cụ thể, host tự tiêm hàm fetch.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=3.9.2 <4.0.0"
+
+dev_dependencies:
+  test: ^1.25.0
+  lints: ^5.0.0

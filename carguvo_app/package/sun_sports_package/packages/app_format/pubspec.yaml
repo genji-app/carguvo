@@ -1,0 +1,15 @@
+name: app_format
+description: >-
+  Format hiển thị DÙNG CHUNG app Flutter + jaspr_web: tiền rút gọn K/M/B (làm
+  tròn XUỐNG), dấu phẩy hàng nghìn, đổi dấu phân tách "." → "," giữa chữ số,
+  nhận diện message tiếng Việt. Pure Dart, 0 dependency.
+version: 0.1.0
+publish_to: none
+
+environment:
+  # Bám app_env (>=3.9.2) — đủ cho app Flutter 3.9.2 lẫn jaspr_web Dart 3.11.
+  sdk: ">=3.9.2 <4.0.0"
+
+dev_dependencies:
+  test: ^1.25.0
+  lints: ^5.0.0

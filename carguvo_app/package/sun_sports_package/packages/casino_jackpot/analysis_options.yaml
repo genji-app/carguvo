@@ -1,0 +1,7 @@
+# Package Dart thuần — lints recommended của SDK (KHÔNG dùng flutter_lints
+# để package không bị kéo về phía Flutter).
+include: package:lints/recommended.yaml
+
+analyzer:
+  language:
+    strict-casts: true

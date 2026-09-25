@@ -1,0 +1,11 @@
+# Gói DART THUẦN — KHÔNG include `flutter_lints` ở đây.
+#
+# Lõi này phải biên dịch được cho cả web (jaspr) lẫn native, nên nó không có
+# `package:flutter` trong dependency; kéo `flutter_lints` vào là thêm một
+# ràng buộc Flutter chỉ để lấy vài luật lint.
+include: package:lints/recommended.yaml
+
+analyzer:
+  language:
+    strict-casts: true
+    strict-raw-types: true

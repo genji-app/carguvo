@@ -1,0 +1,227 @@
+# ─────────────────────────────────
+# Bruno API Client
+# ─────────────────────────────────
+SUN88_v2/environments/
+
+# ─────────────────────────────────
+# Fastlane
+# ─────────────────────────────────
+fastlane/.env
+fastlane/*.ipa
+fastlane/*.apk
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+fastlane/logs
+
+# ─────────────────────────────────
+# Fastlane sensitive
+# ─────────────────────────────────
+fastlane/Pluginfile
+fastlane/Appfile
+fastlane/*.log
+
+# ─────────────────────────────────
+# Credentials & Secrets
+# ─────────────────────────────────
+*.p12
+*.mobileprovision
+*.pem
+*.key
+.env
+.env.*.local
+!.env.example
+
+# ─────────────────────────────────
+# Build outputs
+# ─────────────────────────────────
+build/
+*.ipa
+*.apk
+*.aab
+*.dSYM.zip
+*.dSYM
+
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+ios/build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+# App root: pubspec.lock ĐƯỢC commit (chuẩn app Flutter). Chỉ ignore lock của
+# các package/thư viện con trong /packages (chuẩn library).
+/packages/**/pubspec.lock
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android related
+/android/app/debug
+/android/app/profile
+/android/app/release
+/android/app/build/
+/android/build/
+/android/.gradle/
+/android/.cxx/
+/android/.idea/
+/android/captures/
+/android/.externalNativeBuild/
+/android/local.properties
+*.apk
+*.ap_
+*.aab
+*.dex
+bin/
+gen/
+out/
+
+# iOS related
+/ios/Pods/
+/ios/Podfile
+/ios/Podfile.lock
+/ios/Runner.xcodeproj/project.pbxproj
+/ios/.symlinks/
+/ios/Flutter/Flutter.framework
+/ios/Flutter/Flutter.podspec
+/ios/ServiceDefinitions.json
+/ios/Runner/GeneratedPluginRegistrant.*
+/ios/**/*.mode1v3
+/ios/**/*.mode2v3
+/ios/**/*.moved-aside
+/ios/**/*.pbxuser
+/ios/**/*.perspectivev3
+/ios/**/*sync/
+/ios/**/.sconsign.dblite
+/ios/**/.tags*
+/ios/**/.vagrant/
+/ios/**/DerivedData/
+/ios/**/Icon?
+/ios/**/profile
+/ios/**/xcuserdata
+/ios/**/.xcschemes
+/ios/**/.xcode.env.local
+/ios/*.xcworkspace/xcuserdata/
+/ios/*.xcworkspace/xcshareddata/swiftpm/
+/ios/*.xcodeproj/xcuserdata/
+/ios/*.xcodeproj/project.xcworkspace/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Web related
+/build/web/
+
+# macOS (DS_Store already covered in Miscellaneous)
+.fvm/
+
+# Ignore desktop platforms (only developing for web and mobile)
+linux/
+macos/
+windows/
+
+# Internal Agent Config
+.gemini/
+.agent/
+.antigravitycli/
+.editorconfig
+.gitattributes
+ERRORS.md
+GEMINI.md
+KNOWLEDGE.md
+package.json
+
+# Internal Documentation
+.docs/
+
+# Internal Agent Documentation
+docs/AGENT_FLOW.md
+docs/AGENTS_GUIDE.vi.md
+docs/CONTRIBUTING.md
+docs/CONTRIBUTING.vi.md
+docs/COPYRIGHT.md
+docs/DEPLOYMENT.md
+docs/FAQ.vi.md
+docs/GEMINI_GUIDE.md
+docs/GLOSSARY.md
+docs/GLOSSARY.vi.md
+docs/HOW_ANTIGRAVITY_THINKS.vi.md
+docs/INSTALL_NPX_GUIDE.md
+docs/INSTALL_NPX_GUIDE.vi.md
+docs/MASTER_GUIDE.md
+docs/MASTER_OPERATIONS.md
+docs/MASTER_OPERATIONS.vi.md
+docs/OPERATIONAL_FLOW.md
+docs/OPERATIONAL_FLOW.vi.md
+docs/PLAN-upgrade-core-architecture.md
+docs/PUBLISHING.md
+docs/RULES_GUIDE.vi.md
+docs/SHARED_LIBRARY_GUIDE.vi.md
+docs/SKILLS_GUIDE.vi.md
+docs/SKILLS.md
+docs/TROUBLESHOOTING.md
+docs/TROUBLESHOOTING.vi.md
+docs/UNINSTALL_GUIDE.vi.md
+docs/UPDATE_GUIDE.vi.md
+docs/WORKFLOW_GUIDE.vi.md
+/docs
+
+/graphify-out
+/.claude
+/.agents
+/skills-lock.json
+/.mcp.json
+/CLAUDE.md
+/jaspr_web/CLAUDE.md
+/shrimp-rules.md
+
+assets/images/game_assets
+
+# ─────────────────────────────────
+# Serena MCP (code intelligence cache, local-only)
+# ─────────────────────────────────
+.serena/
+proj_resources/assets
+trippy-crying/
+
+# ─────────────────────────────────
+# jaspr_web: tooling per-machine + file generated, không track trên branch nào
+# (source jaspr_web chỉ tracked trên feature/jaspr_web; các file này là leftover
+#  khi chuyển branch)
+# ─────────────────────────────────
+jaspr_web/node_modules/
+jaspr_web/package-lock.json
+jaspr_web/.tools/
+jaspr_web/web/styles.css

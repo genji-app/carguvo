@@ -1,0 +1,5 @@
+enum FormSubmitButtonStyle {
+  primaryYellow,
+
+  secondary,
+}

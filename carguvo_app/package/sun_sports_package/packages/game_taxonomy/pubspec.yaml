@@ -1,0 +1,17 @@
+name: game_taxonomy
+description: >-
+  Taxonomy phân loại giao dịch DÙNG CHUNG app Flutter + jaspr_web (G2-1 của
+  PACKAGE_LOGIC_IMPROVEMENT_PLAN.md, 16/09/2026): enum ActivityGroup +
+  extension classifyActivityGroup (String → ActivityGroup) — tách khỏi
+  provider_game_manager để transaction_domain không phải đảo tầng phụ thuộc
+  (transaction_domain từng dep ngược provider_game_manager chỉ vì enum này).
+  Pure Dart, 0 dependency.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=3.9.2 <4.0.0"
+
+dev_dependencies:
+  test: ^1.25.0
+  lints: ^5.0.0

@@ -1,0 +1,24 @@
+name: betting_domain
+description: >-
+  Domain đặt cược DÙNG CHUNG app Flutter + jaspr_web: enum nền (OddsStyle/
+  OddsType/GamePart), luật style odds theo marketId, bảng tên market hiển thị,
+  kèo rung (VibratingOddsChecker), selectionId API (tiền tố kèo rung/
+  goalscorer), MissingOfferTracker. Pure Dart; duy nhất 1 dep tầng thấp
+  `app_format` (localizedOrGenericError / isVietnameseMessage — G2-3: description
+  cũ ghi sai "0 dependency ngoài Dart SDK").
+version: 0.1.0
+publish_to: none
+
+environment:
+  # Bám app_env (>=3.9.2) — đủ cho app Flutter 3.9.2 lẫn jaspr_web Dart 3.11.
+  sdk: ">=3.9.2 <4.0.0"
+
+dev_dependencies:
+  test: ^1.25.0
+  lints: ^5.0.0
+
+dependencies:
+  # localizedOrGenericError + isVietnameseMessage (Phase 2) — tầng package
+  # không biết gì về Sentry/log, host truyền callback.
+  app_format:
+    path: ../app_format
