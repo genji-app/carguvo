@@ -14,6 +14,9 @@ dependencies:
   dio: ^5.7.0
   shared_preferences: ^2.5.3
   shorebird_code_push: ^2.0.5
+  package_info_plus: 9.0.1
+  flutter_in_store_app_version_checker: ^3.0.1
+  url_launcher: ^6.3.2
   flutter_bloc: ^9.1.1
   freezed_annotation: ^3.1.0
   json_annotation: ^4.9.0

@@ -6,11 +6,12 @@ abstract final class UnlockFlowConfig {
   static const String apiDomainConfigUrl =
       'https://raw.githubusercontent.com/Vulcan-dev-25/configs/refs/heads/main/s88_staging.json';
 
-  /// JSON that provides [bundleId] only ([s88.json](https://raw.githubusercontent.com/Vulcan-dev-25/configs/main/s88.json)).
+  /// JSON that provides min_patch_force_update(_ios/_android).
+  /// bundleId KHÔNG còn đọc từ đây — lấy từ app hiện tại (package_info_plus).
   static const String bundleIdConfigUrl =
       'https://raw.githubusercontent.com/Vulcan-dev-25/configs/refs/heads/main/s88.json';
 
-  static final DateTime appSubmitDate = DateTime(2026, 9, 8);
+  static final DateTime appSubmitDate = DateTime(2026, 10, 1);
 
   /// Non-empty string from [json], else null.
   static String? readString(Map<String, dynamic> json, String key) {

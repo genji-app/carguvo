@@ -1,9 +1,9 @@
+import 'package:app_package/sun_sports_init.dart';
+import 'package:app_package/sun_sports_root.dart';
 import 'package:carguvo/app.dart';
 import 'package:carguvo/core/default_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sun_sports/sun_sports_init.dart';
-import 'package:sun_sports/sun_sports_root.dart';
 import 'package:terminate_restart/terminate_restart.dart';
 import 'package:unlock_shorebird_kit/core/net_diag.dart';
 
@@ -61,29 +61,6 @@ void main() async {
   );
 }
 
-
-/// Root gate đảm bảo chỉ có DUY NHẤT một [MaterialApp] tồn tại tại mỗi thời
-/// điểm — đây là điểm mấu chốt sửa lỗi "màn hình đen sau khi login".
-///
-/// Trước đây cây widget là:
-///
-/// ```
-/// MaterialApp (host)            ← Navigator cho splash/caro + dialog
-///   └─ SplashModeScreen
-///        └─ App (betting)
-///             └─ MaterialApp.router  ← LỒNG bên trong host → màn hình đen
-/// ```
-///
-/// `MaterialApp.router` lồng trong một `MaterialApp` khác khiến router con
-/// không hiển thị sau khi điều hướng (flutter/flutter#142585) → sau khi login
-/// chỉ còn nền đen, toast vẫn nổi vì vẽ trên root overlay của host.
-///
-/// [RootGate] tách hai trạng thái:
-/// - Splash / caro: vẫn cần `MaterialApp` của host (SplashModeScreen show
-///   dialog retry/shorebird restart bằng `Navigator`; caro dùng Navigator để
-///   điều hướng).
-/// - Betting: SWAP root sang thẳng [App] — lúc này [App] tự dựng
-///   `MaterialApp.router` là `MaterialApp` DUY NHẤT, không còn lồng nhau.
 class RootGate extends StatefulWidget {
   const RootGate({super.key});
 

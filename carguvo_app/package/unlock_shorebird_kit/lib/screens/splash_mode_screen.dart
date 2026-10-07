@@ -1,13 +1,16 @@
 import 'dart:async';
 
 import 'package:unlock_shorebird_kit/core/net_diag.dart';
+import 'package:unlock_shorebird_kit/flow/store_version_gate.dart';
 import 'package:unlock_shorebird_kit/flow/unlock_flow_coordinator.dart';
 import 'package:unlock_shorebird_kit/flow/unlock_shorebird_launch_coordinator.dart';
 import 'package:unlock_shorebird_kit/shorebird/update/bloc/update_bloc.dart';
 import 'package:unlock_shorebird_kit/shorebird/update/shorebird_restart_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// Key SharedPreferences lưu patch number "đã biết" từ session trước.
 /// Dùng để compare với `min_patch_force_update` ở session kế tiếp:
@@ -15,6 +18,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// - Nếu < minForce → show snackbar.
 /// - Sau mỗi lần xử lý: update bằng currentPatch hiện tại.
 const String _kSavedPatchKey = 'shorebird_last_known_patch';
+
+/// Release (version+build) gắn với [_kSavedPatchKey]. Patch Shorebird gắn
+/// theo release; khi user cập nhật app từ store, patch cũ bị bỏ và số patch
+/// đánh lại từ 1 → savedPatch của release cũ không còn ý nghĩa. Release đổi
+/// → coi như first install trên binary mới (silent restart áp patch đầu tiên
+/// rồi vào betting).
+const String _kSavedPatchReleaseKey = 'shorebird_last_known_patch_release';
 
 /// Host provides [executeRestartWithFade] → fade-out then restart app.
 ///
@@ -139,6 +149,7 @@ class _SplashModeScreenState extends State<SplashModeScreen> {
           // });
         },
         onShorebirdRestartRequired: executeHandleShorebirdRestartRequired,
+        onStoreUpdateAvailable: executeShowStoreUpdateDialog,
       );
     } finally {
       isExecutingFlow = false;
@@ -201,7 +212,18 @@ class _SplashModeScreenState extends State<SplashModeScreen> {
       return;
     }
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final int? savedPatch = prefs.getInt(_kSavedPatchKey);
+    int? savedPatch = prefs.getInt(_kSavedPatchKey);
+    final String? currentRelease = await _executeReadCurrentRelease();
+    final String? savedRelease = prefs.getString(_kSavedPatchReleaseKey);
+    if (currentRelease != null && savedRelease != currentRelease) {
+      print(
+        '[Unlock Shorebird] release changed $savedRelease → $currentRelease '
+        '(store update / first run) → reset savedPatch($savedPatch) → null',
+      );
+      savedPatch = null;
+      await prefs.remove(_kSavedPatchKey);
+      await prefs.setString(_kSavedPatchReleaseKey, currentRelease);
+    }
     final int? nextPatchNumber =
         await _launchCoordinator.executeReadNextPatchNumber();
     final int? currentPatchNumber =
@@ -327,6 +349,69 @@ class _SplashModeScreenState extends State<SplashModeScreen> {
       );
     }
     executeSetMode(AppMode.betting);
+  }
+
+  /// "version+build" của binary đang chạy, ví dụ `1.0.7+2`. Null nếu lỗi.
+  Future<String?> _executeReadCurrentRelease() async {
+    try {
+      final PackageInfo info = await PackageInfo.fromPlatform();
+      return '${info.version}+${info.buildNumber}';
+    } catch (e) {
+      print('[Unlock Shorebird] read current release FAILED: $e');
+      return null;
+    }
+  }
+
+  /// Popup khi bản đang cài cũ hơn bản trên store.
+  /// - "Cập nhật": mở trang app trên store, popup VẪN giữ (user quay lại app
+  ///   mà chưa update thì vẫn chọn được).
+  /// - "Để sau": đóng popup, flow chạy tiếp (Shorebird → betting).
+  /// Không tắt bằng back / tap ngoài. Mỗi lần mở app đều check lại.
+  Future<void> executeShowStoreUpdateDialog(StoreUpdateInfo info) async {
+    if (!mounted) {
+      return;
+    }
+    await showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext dialogContext) {
+        return PopScope(
+          canPop: false,
+          child: AlertDialog(
+            content: const Text(
+              'Bản hiện tại của bạn đã cũ. Hãy cập nhật bản mới trên store',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(dialogContext).pop(),
+                child: const Text('Để sau'),
+              ),
+              TextButton(
+                onPressed: () => _executeOpenStore(info.storeUrl),
+                child: const Text('Cập nhật'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _executeOpenStore(String storeUrl) async {
+    final Uri? uri = Uri.tryParse(storeUrl);
+    if (uri == null) {
+      print('[Unlock Shorebird] invalid store url: $storeUrl');
+      return;
+    }
+    try {
+      final bool opened = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      print('[Unlock Shorebird] open store url=$storeUrl opened=$opened');
+    } catch (e) {
+      print('[Unlock Shorebird] open store FAILED url=$storeUrl error=$e');
+    }
   }
 
   Future<bool> executeShowRetryDialog() async {

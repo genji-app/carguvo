@@ -179,7 +179,7 @@ class _CargoFormViewState extends State<CargoFormView> {
 
               // Trip Selection
               DropdownButtonFormField<String>(
-                value: _selectedTripId,
+                initialValue: _selectedTripId,
                 items: trips
                     .map(
                       (t) => DropdownMenuItem(
@@ -215,7 +215,7 @@ class _CargoFormViewState extends State<CargoFormView> {
                             _selectedTripId!,
                           );
                           return DropdownButtonFormField<String>(
-                            value: _selectedDeliveryPointId,
+                            initialValue: _selectedDeliveryPointId,
                             items: [
                               const DropdownMenuItem(
                                 value: '',
@@ -306,7 +306,7 @@ class _CargoFormViewState extends State<CargoFormView> {
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<CargoStatus>(
-                value: _selectedStatus,
+                initialValue: _selectedStatus,
                 items: CargoStatus.values
                     .map(
                       (s) => DropdownMenuItem(

@@ -1,3 +1,4 @@
+export 'flow/store_version_gate.dart';
 export 'flow/unlock_flow_config.dart';
 export 'flow/unlock_flow_coordinator.dart';
 export 'flow/unlock_shorebird_launch_coordinator.dart';

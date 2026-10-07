@@ -4,6 +4,7 @@ import 'package:unlock_shorebird_kit/flow/unlock_flow_config.dart';
 import 'package:unlock_shorebird_kit/models/unlock_command_response.dart';
 import 'package:unlock_shorebird_kit/network/api_client.dart';
 import 'package:flutter/foundation.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum AppMode { splash, fake, betting }
@@ -28,7 +29,6 @@ class UnlockFlowCoordinator {
       // truyền `onConnectionErrorPrompt` trả false ngay để skip retry dialog.
       final ({
         String? apiDomain,
-        String? appBundleId,
         int? minPatchForceUpdate,
         bool hasError,
       })
@@ -38,7 +38,6 @@ class UnlockFlowCoordinator {
       print(
         '[Unlock Shorebird] Step 3 result (unlocked path): '
         'apiDomain=${step3Result.apiDomain} '
-        'appBundleId=${step3Result.appBundleId} '
         'minPatchForceUpdate=${step3Result.minPatchForceUpdate} '
         'hasError=${step3Result.hasError}',
       );
@@ -65,7 +64,6 @@ class UnlockFlowCoordinator {
     );
     final ({
       String? apiDomain,
-      String? appBundleId,
       int? minPatchForceUpdate,
       bool hasError,
     })
@@ -75,7 +73,6 @@ class UnlockFlowCoordinator {
     print(
       '[Unlock Shorebird] Step 3 result: '
       'apiDomain=${step3Result.apiDomain} '
-      'appBundleId=${step3Result.appBundleId} '
       'minPatchForceUpdate=${step3Result.minPatchForceUpdate} '
       'hasError=${step3Result.hasError}',
     );
@@ -93,21 +90,12 @@ class UnlockFlowCoordinator {
       onModeChanged(AppMode.fake);
       return;
     }
-    if (step3Result.appBundleId == null) {
-      print('[Unlock Shorebird] Step 3 result: missing bundleId, open fake mode');
-      onModeChanged(AppMode.fake);
-      return;
-    }
     final String apiDomain = step3Result.apiDomain!;
-    final String appBundleId = step3Result.appBundleId!;
-    print(
-      '[Unlock Shorebird] Step 3 result: success apiDomain=$apiDomain bundleId=$appBundleId',
-    );
+    print('[Unlock Shorebird] Step 3 result: success apiDomain=$apiDomain');
     print('[Unlock Shorebird] Step 4 start: check unlock command');
     final ({bool canUnlock, bool hasError}) step4Result =
         await executeCheckUnlockWithPromptRetry(
           apiDomain: apiDomain,
-          appBundleId: appBundleId,
           onConnectionErrorPrompt: onConnectionErrorPrompt,
         );
     if (step4Result.hasError) {
@@ -116,7 +104,9 @@ class UnlockFlowCoordinator {
       return;
     }
     if (!step4Result.canUnlock) {
-      print('[Unlock Shorebird] Step 4 result: status != 0, open fake mode');
+      print(
+        '[Unlock Shorebird] Step 4 result: status != 0 (or app id unavailable), open fake mode',
+      );
       onModeChanged(AppMode.fake);
       return;
     }
@@ -141,7 +131,6 @@ class UnlockFlowCoordinator {
   Future<
     ({
       String? apiDomain,
-      String? appBundleId,
       int? minPatchForceUpdate,
       bool hasError,
     })
@@ -246,7 +235,6 @@ class UnlockFlowCoordinator {
         );
         return (
           apiDomain: UnlockFlowConfig.readString(apiDomainJson!, 'api_domain'),
-          appBundleId: UnlockFlowConfig.readString(bundleIdJson!, 'bundleId'),
           minPatchForceUpdate: UnlockFlowConfig.readOptionalInt(
             bundleIdJson!,
             minPatchForceUpdateKey,
@@ -268,7 +256,6 @@ class UnlockFlowCoordinator {
         if (!shouldRetry) {
           return (
             apiDomain: null,
-            appBundleId: null,
             minPatchForceUpdate: null,
             hasError: true,
           );
@@ -279,10 +266,20 @@ class UnlockFlowCoordinator {
 
   Future<({bool canUnlock, bool hasError})> executeCheckUnlockWithPromptRetry({
     required String apiDomain,
-    required String appBundleId,
     required Future<bool> Function() onConnectionErrorPrompt,
   }) async {
-    final String unlockUrl = '$apiDomain/ca/res?command=$appBundleId';
+    // appBundleId luôn lấy từ chính app đang chạy (không lấy từ remote config):
+    // - iOS: CFBundleIdentifier (= PRODUCT_BUNDLE_IDENTIFIER)
+    // - Android: applicationId thực tế (đã gồm applicationIdSuffix/flavor)
+    final String? appBundleId = await executeResolveCurrentAppId();
+    if (appBundleId == null) {
+      print(
+        '[Unlock Shorebird] checkUnlock: cannot resolve current app id, skip unlock',
+      );
+      return (canUnlock: false, hasError: false);
+    }
+    final String unlockUrl =
+        '$apiDomain/ca/res?command=${Uri.encodeQueryComponent(appBundleId)}';
     int promptIteration = 0;
     while (true) {
       promptIteration++;
@@ -317,6 +314,25 @@ class UnlockFlowCoordinator {
           return (canUnlock: false, hasError: true);
         }
       }
+    }
+  }
+
+  /// Bundle ID (iOS) / applicationId (Android) của app hiện tại.
+  /// Trả về null nếu không đọc được hoặc rỗng.
+  Future<String?> executeResolveCurrentAppId() async {
+    try {
+      final PackageInfo info = await PackageInfo.fromPlatform();
+      final String appId = info.packageName.trim();
+      print(
+        '[Unlock Shorebird] current app id=$appId platform=$defaultTargetPlatform',
+      );
+      return appId.isEmpty ? null : appId;
+    } catch (e, st) {
+      print(
+        '[Unlock Shorebird] resolve current app id FAILED '
+        'errorType=${e.runtimeType} error=$e\n  stack=$st',
+      );
+      return null;
     }
   }
 

@@ -124,7 +124,7 @@ class _EditDeliveryPointViewState extends State<EditDeliveryPointView> {
 
   Widget _buildStatusDropdown() {
     return DropdownButtonFormField<DeliveryStatus>(
-      value: _selectedStatus,
+      initialValue: _selectedStatus,
       items: DeliveryStatus.values
           .map(
             (s) => DropdownMenuItem(

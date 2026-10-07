@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:unlock_shorebird_kit/flow/store_version_gate.dart';
 import 'package:unlock_shorebird_kit/flow/unlock_flow_coordinator.dart';
 import 'package:unlock_shorebird_kit/shorebird/update/bloc/update_bloc.dart';
 import 'package:unlock_shorebird_kit/shorebird/update/bloc/update_event.dart';
@@ -14,7 +15,9 @@ final class UnlockShorebirdLaunchCoordinator {
     UnlockFlowCoordinator? unlockFlowCoordinator,
     ShorebirdUpdater? shorebirdUpdater,
     UpdateTrack shorebirdTrack = UpdateTrack.stable,
-  }) : _unlockFlowCoordinator =
+    StoreVersionGate storeVersionGate = const StoreVersionGate(),
+  }) : _storeVersionGate = storeVersionGate,
+       _unlockFlowCoordinator =
            unlockFlowCoordinator ?? UnlockFlowCoordinator(),
        _shorebirdUpdateBloc = UpdateBloc(
          updater: shorebirdUpdater ?? ShorebirdUpdater(),
@@ -24,6 +27,7 @@ final class UnlockShorebirdLaunchCoordinator {
        );
 
   final UnlockFlowCoordinator _unlockFlowCoordinator;
+  final StoreVersionGate _storeVersionGate;
   final UpdateBloc _shorebirdUpdateBloc;
   bool _isShorebirdGateRunning = false;
 
@@ -63,6 +67,7 @@ final class UnlockShorebirdLaunchCoordinator {
     required void Function({required bool isShorebirdSyncing})
     onShorebirdSyncVisibilityChanged,
     required Future<void> Function() onShorebirdRestartRequired,
+    Future<void> Function(StoreUpdateInfo info)? onStoreUpdateAvailable,
   }) async {
     await _unlockFlowCoordinator.executeFlow(
       onModeChanged: (AppMode mode) {
@@ -74,6 +79,7 @@ final class UnlockShorebirdLaunchCoordinator {
               onShorebirdSyncVisibilityChanged:
                   onShorebirdSyncVisibilityChanged,
               onShorebirdRestartRequired: onShorebirdRestartRequired,
+              onStoreUpdateAvailable: onStoreUpdateAvailable,
             ),
           );
         } else {
@@ -94,6 +100,7 @@ final class UnlockShorebirdLaunchCoordinator {
     required void Function({required bool isShorebirdSyncing})
     onShorebirdSyncVisibilityChanged,
     required Future<void> Function() onShorebirdRestartRequired,
+    Future<void> Function(StoreUpdateInfo info)? onStoreUpdateAvailable,
   }) async {
     if (_isShorebirdGateRunning || !isActive()) {
       return;
@@ -104,6 +111,29 @@ final class UnlockShorebirdLaunchCoordinator {
       syncUiActive = true;
       onShorebirdSyncVisibilityChanged(isShorebirdSyncing: true);
       onAppModeSet(AppMode.splash);
+
+      // Store version gate (chỉ chạy trên nhánh betting = user đã unlock):
+      // nếu bản cài cũ hơn bản trên store → popup "Cập nhật / Để sau".
+      // Chạy TRƯỚC Shorebird để không tải patch cho binary sắp bị thay.
+      // Lỗi / không có bản mới → bỏ qua, đi tiếp như cũ.
+      if (onStoreUpdateAvailable != null) {
+        final StoreUpdateInfo? storeUpdate =
+            await _storeVersionGate.executeCheckStoreUpdate();
+        if (!isActive()) {
+          return;
+        }
+        if (storeUpdate != null) {
+          print(
+            '[Unlock Shorebird] store has newer version: '
+            '${storeUpdate.currentVersion} → ${storeUpdate.newVersion}',
+          );
+          await onStoreUpdateAvailable(storeUpdate);
+          if (!isActive()) {
+            return;
+          }
+        }
+      }
+
       _shorebirdUpdateBloc.add(const UpdateCheckRequested());
 
       // Chờ đến khi Shorebird trả kết quả cuối cùng: upToDate, restartRequired,

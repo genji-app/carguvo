@@ -62,7 +62,7 @@ class _AddDeliveryPointViewState extends State<AddDeliveryPointView> {
               Text('Chuyến xe *', style: AppTypography.labelMedium),
               const SizedBox(height: 8),
               DropdownButtonFormField<String>(
-                value: _selectedTripId,
+                initialValue: _selectedTripId,
                 items: trips
                     .map(
                       (t) => DropdownMenuItem(
